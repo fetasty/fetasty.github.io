@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on fetasty</title>
+        <link>https://fetasty.github.io/en/categories/</link>
+        <description>Recent content in Categories on fetasty</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en</language>
+        <copyright>fetasty</copyright><atom:link href="https://fetasty.github.io/en/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Computer Basic</title>
+        <link>https://fetasty.github.io/en/categories/computer-basic/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://fetasty.github.io/en/categories/computer-basic/</guid>
+        <description>&lt;img src="https://fetasty.github.io/categories/computer-basic/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Computer Basic" /&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
