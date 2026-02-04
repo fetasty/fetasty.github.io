@@ -199,10 +199,10 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
         </item>
         <item>
         <title>关于</title>
-        <link>https://fetasty.github.io/%E5%85%B3%E4%BA%8E/</link>
+        <link>https://fetasty.github.io/about/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
-        <guid>https://fetasty.github.io/%E5%85%B3%E4%BA%8E/</guid>
+        <guid>https://fetasty.github.io/about/</guid>
         <description>&lt;p&gt;一个爱折腾的技术宅垃圾佬, 像素画和2D游戏爱好者&lt;/p&gt;
 &lt;p&gt;以下是我个人技能与毕业后的社会经历&lt;/p&gt;
 &lt;h2 id=&#34;技术栈&#34;&gt;技术栈

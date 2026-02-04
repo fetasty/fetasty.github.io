@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一个爱折腾的技术宅垃圾佬, 像素画和2D游戏爱好者\n以下是我个人技能与毕业后的社会经历\n技术栈\rGit 滚瓜烂熟倒背如流, 最熟悉最离不开的时光机 C/C++11 精通, 自2018年毕业至今主后端开发一直使用 Python 时常拿来用于编写易用脚本, 或者开发简单Web服务, 方便得爱不释手 Linux/Docker 最爱的东西! 经常玩NAS/捡垃圾/刷机, 随便来一个二手Android手机都能给它变成一台部署各种平台的专属服务器, Linux可太好玩了! Godot/像素画 一直对像素风2D游戏开发感兴趣, 有时间就会学一学试一试. 而且意外发现游戏引擎才是最好的工具库, UI/纹理材质/渲染管线/动画/物理/数学计算/音频/视频/粒子特效等等, 无所不能, 而且Godot引擎本身也不太大, 直接拿来做桌面应用竟然是一个非常完美的选择 Buildroot/Yocto/嵌入式/OTA 公司嵌入式Linux缺人手, 被拉去硬顶, 期间强制学习了不少相关内容, 也算是完整跑了一遍嵌入式Linux的定制 - 交叉编译 - 烧录 - 开发板调测的全流程 AI Coding 如果说2023年的AI编程模型只能拿来做输入提示, 那么现在的AI编程可以完全当作一个开发助手了, 虽然时不时会有一些恼火的问题必须自己亲手解决, 但不可否认有了它可以极大程度的拓展能力边界. 在公司临时受命开发过两个Web应用, 我写后端, AI辅助写前端, 最后效果竟然出奇的好! 这样我也算是基于AI的全栈工程师了! 设备管理Web应用: 管理局域网内的设备, 支持设备列表展示(设备自动心跳上报信息), 支持设备控制(下发命令: 修改配置, 切换4G/以太网, 重启等), 支持用户鉴权/密码修改, 支持操作日志记录和展示, 基于SQLite + Mongoose (C, PReact, Tailcss)实现 在线OTA Web平台: 嵌入式设备信息管理, 固件包上传/下载/删除管理, 设备升级管理, 用户鉴权. 基于Python Flask + SQLite + Vue实现, Web服务实现MQTT + HTTP双协议, 设备通过MQTT定期上报状态信息, 服务将设备信息维护在数据库表中. 升级时服务向指定设备下发MQTT消息, 包含固件包下载URL, URL中包含token参数, 指定时间/使用次数内有效, 服务同时提供固件包下载HTTP服务, 在接口中获取token参数进行数据库校验, 校验通过则返回文件 Lua/C#/Web 以前有使用, 但时间久远, 捡起来需要再熟悉熟悉 Rust/Zig 现代化的C++/C语言, 保证性能的同时, 更安全, 抽象程度更高, 使用更简单, 值得关注和学习 经历\r2018年毕业至今一直待在杭州, 主后端开发, 但也会参与到前端和其余领域的开发工作\n">
+<title>关于</title>
+
+<link rel='canonical' href='https://fetasty.github.io/about/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="关于">
+<meta property='og:description' content="一个爱折腾的技术宅垃圾佬, 像素画和2D游戏爱好者\n以下是我个人技能与毕业后的社会经历\n技术栈\rGit 滚瓜烂熟倒背如流, 最熟悉最离不开的时光机 C/C++11 精通, 自2018年毕业至今主后端开发一直使用 Python 时常拿来用于编写易用脚本, 或者开发简单Web服务, 方便得爱不释手 Linux/Docker 最爱的东西! 经常玩NAS/捡垃圾/刷机, 随便来一个二手Android手机都能给它变成一台部署各种平台的专属服务器, Linux可太好玩了! Godot/像素画 一直对像素风2D游戏开发感兴趣, 有时间就会学一学试一试. 而且意外发现游戏引擎才是最好的工具库, UI/纹理材质/渲染管线/动画/物理/数学计算/音频/视频/粒子特效等等, 无所不能, 而且Godot引擎本身也不太大, 直接拿来做桌面应用竟然是一个非常完美的选择 Buildroot/Yocto/嵌入式/OTA 公司嵌入式Linux缺人手, 被拉去硬顶, 期间强制学习了不少相关内容, 也算是完整跑了一遍嵌入式Linux的定制 - 交叉编译 - 烧录 - 开发板调测的全流程 AI Coding 如果说2023年的AI编程模型只能拿来做输入提示, 那么现在的AI编程可以完全当作一个开发助手了, 虽然时不时会有一些恼火的问题必须自己亲手解决, 但不可否认有了它可以极大程度的拓展能力边界. 在公司临时受命开发过两个Web应用, 我写后端, AI辅助写前端, 最后效果竟然出奇的好! 这样我也算是基于AI的全栈工程师了! 设备管理Web应用: 管理局域网内的设备, 支持设备列表展示(设备自动心跳上报信息), 支持设备控制(下发命令: 修改配置, 切换4G/以太网, 重启等), 支持用户鉴权/密码修改, 支持操作日志记录和展示, 基于SQLite + Mongoose (C, PReact, Tailcss)实现 在线OTA Web平台: 嵌入式设备信息管理, 固件包上传/下载/删除管理, 设备升级管理, 用户鉴权. 基于Python Flask + SQLite + Vue实现, Web服务实现MQTT + HTTP双协议, 设备通过MQTT定期上报状态信息, 服务将设备信息维护在数据库表中. 升级时服务向指定设备下发MQTT消息, 包含固件包下载URL, URL中包含token参数, 指定时间/使用次数内有效, 服务同时提供固件包下载HTTP服务, 在接口中获取token参数进行数据库校验, 校验通过则返回文件 Lua/C#/Web 以前有使用, 但时间久远, 捡起来需要再熟悉熟悉 Rust/Zig 现代化的C++/C语言, 保证性能的同时, 更安全, 抽象程度更高, 使用更简单, 值得关注和学习 经历\r2018年毕业至今一直待在杭州, 主后端开发, 但也会参与到前端和其余领域的开发工作\n">
+<meta property='og:url' content='https://fetasty.github.io/about/'>
+<meta property='og:site_name' content='风酥糖'>
+<meta property='og:type' content='article'><meta property='article:section' content='Page' />
+<meta name="twitter:title" content="关于">
+<meta name="twitter:description" content="一个爱折腾的技术宅垃圾佬, 像素画和2D游戏爱好者\n以下是我个人技能与毕业后的社会经历\n技术栈\rGit 滚瓜烂熟倒背如流, 最熟悉最离不开的时光机 C/C++11 精通, 自2018年毕业至今主后端开发一直使用 Python 时常拿来用于编写易用脚本, 或者开发简单Web服务, 方便得爱不释手 Linux/Docker 最爱的东西! 经常玩NAS/捡垃圾/刷机, 随便来一个二手Android手机都能给它变成一台部署各种平台的专属服务器, Linux可太好玩了! Godot/像素画 一直对像素风2D游戏开发感兴趣, 有时间就会学一学试一试. 而且意外发现游戏引擎才是最好的工具库, UI/纹理材质/渲染管线/动画/物理/数学计算/音频/视频/粒子特效等等, 无所不能, 而且Godot引擎本身也不太大, 直接拿来做桌面应用竟然是一个非常完美的选择 Buildroot/Yocto/嵌入式/OTA 公司嵌入式Linux缺人手, 被拉去硬顶, 期间强制学习了不少相关内容, 也算是完整跑了一遍嵌入式Linux的定制 - 交叉编译 - 烧录 - 开发板调测的全流程 AI Coding 如果说2023年的AI编程模型只能拿来做输入提示, 那么现在的AI编程可以完全当作一个开发助手了, 虽然时不时会有一些恼火的问题必须自己亲手解决, 但不可否认有了它可以极大程度的拓展能力边界. 在公司临时受命开发过两个Web应用, 我写后端, AI辅助写前端, 最后效果竟然出奇的好! 这样我也算是基于AI的全栈工程师了! 设备管理Web应用: 管理局域网内的设备, 支持设备列表展示(设备自动心跳上报信息), 支持设备控制(下发命令: 修改配置, 切换4G/以太网, 重启等), 支持用户鉴权/密码修改, 支持操作日志记录和展示, 基于SQLite + Mongoose (C, PReact, Tailcss)实现 在线OTA Web平台: 嵌入式设备信息管理, 固件包上传/下载/删除管理, 设备升级管理, 用户鉴权. 基于Python Flask + SQLite + Vue实现, Web服务实现MQTT + HTTP双协议, 设备通过MQTT定期上报状态信息, 服务将设备信息维护在数据库表中. 升级时服务向指定设备下发MQTT消息, 包含固件包下载URL, URL中包含token参数, 指定时间/使用次数内有效, 服务同时提供固件包下载HTTP服务, 在接口中获取token参数进行数据库校验, 校验通过则返回文件 Lua/C#/Web 以前有使用, 但时间久远, 捡起来需要再熟悉熟悉 Rust/Zig 现代化的C++/C语言, 保证性能的同时, 更安全, 抽象程度更高, 使用更简单, 值得关注和学习 经历\r2018年毕业至今一直待在杭州, 主后端开发, 但也会参与到前端和其余领域的开发工作\n">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5d63a2fe6c3efe2b.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😄</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">风酥糖</a></h1>
+            <h2 class="site-description">别想, 去做! 烂归烂, 总比不干好.</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='mailto://fetasty@outlook.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/fetasty'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li  class='current' >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://fetasty.github.io/" selected>简体中文</option>
+                                
+                                    <option value="https://fetasty.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#技术栈">技术栈</a></li>
+    <li><a href="#经历">经历</a>
+      <ol>
+        <li><a href="#初入社会-加入棋牌游戏公司-201807---201912">初入社会, 加入棋牌游戏公司 (2018.07 - 2019.12)</a></li>
+        <li><a href="#尝试去喜欢的游戏公司-202004---202005">尝试去喜欢的游戏公司 (2020.04 - 2020.05)</a></li>
+        <li><a href="#加入稍大的公司-在稳定的工作中焦虑和自我怀疑-202006---202209">加入稍大的公司, 在稳定的工作中焦虑和自我怀疑 (2020.06 - 2022.09)</a></li>
+        <li><a href="#失败的考研尝试-202209---202304">失败的考研尝试 (2022.09 - 2023.04)</a></li>
+        <li><a href="#低空经济小公司-202305---202601">低空经济小公司 (2023.05 - 2026.01)</a></li>
+      </ol>
+    </li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/about/">关于</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 11 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>一个爱折腾的技术宅垃圾佬, 像素画和2D游戏爱好者</p>
+<p>以下是我个人技能与毕业后的社会经历</p>
+<h2 id="技术栈">技术栈
+</h2><ul>
+<li><strong>Git</strong> 滚瓜烂熟倒背如流, 最熟悉最离不开的时光机</li>
+<li><strong>C/C++11</strong> 精通, 自2018年毕业至今主后端开发一直使用</li>
+<li><strong>Python</strong> 时常拿来用于编写易用脚本, 或者开发简单Web服务, 方便得爱不释手</li>
+<li><strong>Linux/Docker</strong> 最爱的东西! 经常玩NAS/捡垃圾/刷机, 随便来一个二手Android手机都能给它变成一台部署各种平台的专属服务器, Linux可太好玩了!</li>
+<li><strong>Godot/像素画</strong> 一直对像素风2D游戏开发感兴趣, 有时间就会学一学试一试. 而且意外发现游戏引擎才是最好的工具库, UI/纹理材质/渲染管线/动画/物理/数学计算/音频/视频/粒子特效等等, 无所不能, 而且Godot引擎本身也不太大, 直接拿来做桌面应用竟然是一个非常完美的选择</li>
+<li><strong>Buildroot/Yocto/嵌入式/OTA</strong> 公司嵌入式Linux缺人手, 被拉去硬顶, 期间强制学习了不少相关内容, 也算是完整跑了一遍嵌入式Linux的定制 - 交叉编译 - 烧录 - 开发板调测的全流程</li>
+<li><strong>AI Coding</strong> 如果说2023年的AI编程模型只能拿来做输入提示, 那么现在的AI编程可以完全当作一个开发助手了, 虽然时不时会有一些恼火的问题必须自己亲手解决, 但不可否认有了它可以极大程度的拓展能力边界. 在公司临时受命开发过两个Web应用, 我写后端, AI辅助写前端, 最后效果竟然出奇的好! 这样我也算是基于AI的全栈工程师了!
+<ul>
+<li>设备管理Web应用: 管理局域网内的设备, 支持设备列表展示(设备自动心跳上报信息), 支持设备控制(下发命令: 修改配置, 切换4G/以太网, 重启等), 支持用户鉴权/密码修改, 支持操作日志记录和展示, 基于SQLite + Mongoose (C, PReact, Tailcss)实现</li>
+<li>在线OTA Web平台: 嵌入式设备信息管理, 固件包上传/下载/删除管理, 设备升级管理, 用户鉴权. 基于Python Flask + SQLite + Vue实现, Web服务实现MQTT + HTTP双协议, 设备通过MQTT定期上报状态信息, 服务将设备信息维护在数据库表中. 升级时服务向指定设备下发MQTT消息, 包含固件包下载URL, URL中包含token参数, 指定时间/使用次数内有效, 服务同时提供固件包下载HTTP服务, 在接口中获取token参数进行数据库校验, 校验通过则返回文件</li>
+</ul>
+</li>
+<li><strong>Lua/C#/Web</strong> 以前有使用, 但时间久远, 捡起来需要再熟悉熟悉</li>
+<li><strong>Rust/Zig</strong> 现代化的C++/C语言, 保证性能的同时, 更安全, 抽象程度更高, 使用更简单, 值得关注和学习</li>
+</ul>
+<h2 id="经历">经历
+</h2><p>2018年毕业至今一直待在杭州, 主后端开发, 但也会参与到前端和其余领域的开发工作</p>
+<h3 id="初入社会-加入棋牌游戏公司-201807---201912">初入社会, 加入棋牌游戏公司 (2018.07 - 2019.12)
+</h3><p>第一家公司主营棋牌游戏, 入职时大约700人, 我是后端开发, C++游戏服务器, Cocos2D/Lua手机客户端, 维护游戏服务正常运行, 游戏活动功能开发, 在此期间使用过MySQL数据库, Redis热点数据缓存, RabbitMQ消息队列</p>
+<p>离职前政策变更, 部分游戏玩法被定义为&quot;协助赌博&quot;, 有一些管理/策划被关小黑屋, 公司分离风险业务到子公司, 给很多同事选择, 要么到子公司工作, 要么离职. 我觉得自己还年轻风险太大, 选择了离职并回了老家湖北一趟, 结果恰好碰到疫情封控, 直接在老家被封了好几个月</p>
+<h3 id="尝试去喜欢的游戏公司-202004---202005">尝试去喜欢的游戏公司 (2020.04 - 2020.05)
+</h3><p>封控到2020年4月中旬已经陆陆续续开放, 回到杭州的我感觉既熟悉又陌生, 我喜欢玩游戏, 对游戏开发也很感兴趣, 想着找一家游戏公司, 最好产品是ARPG/策略/MMO/沙盒类型游戏的, 一方面自己比较喜欢这类, 一方面不想再接触棋牌类游戏(怕有风险).</p>
+<p>但事实是残酷的, 精心筛选的游戏公司, 大大小小都试过投递, 很多简历都石沉大海, 连什么原因被拒都不知道.</p>
+<p>后面自己猜测可能经历不符合, 棋牌游戏使用的技术和其他类型游戏还是有很大区别的, 看到很多游戏公司都要求会Unity引擎, 但是我都没有摸过, 我花了一段时间边学习边实践, 用Unity复刻了一个复古的Tank2D游戏, 之后融入自己对网络知识的理解, 加入了本地网络多人游戏支持, 加入了Android+PC版本支持, 移动端自动展示虚拟摇杆和操控按钮, PC端则使用键盘+鼠标操控, 并且支持移动端与PC端联机.</p>
+<p>虽然只有几个关卡, 可能还有Bug, 但是还比较有成就感, UI/关卡生成/玩家控制/敌人生成/简单敌人AI/碰撞检测/道具生成/关卡结算/动画/音效等, 各方面内容均有实际编码成果.</p>
+<p>但是在简历上加上这个花了一个月时间完成的项目后, 也并未带来多少改观, 现实是冰冷的, 生活开支压力加上找工作的挫折, 让我深感沮丧和焦虑.</p>
+<p>我修改简历和求职信息, 全部改为C++后端开发, 还没开始投递多少公司, 立即就收到了多个面试邀约和猎头推荐, 我不知道是否应该开心.</p>
+<h3 id="加入稍大的公司-在稳定的工作中焦虑和自我怀疑-202006---202209">加入稍大的公司, 在稳定的工作中焦虑和自我怀疑 (2020.06 - 2022.09)
+</h3><p>第二家公司做工业自动化, 四千多人的企业, 我进的虚拟软件部, C++后端服务器, C#(WPF)前端PC客户端, 主要做各种化工设备的模拟/工况模拟/数据对点, 做过对点服务器的功能开发和性能优化, 易用性工具开发(一键启动, 一键备份/还原)方便规模化部署, 用于演示和教学</p>
+<p>在这家公司做的工作比较杂, 但比较平稳. 除了主要的C++服务开发维护, 还需要开发各种应对特定项目的定制工具, 客户现场情况各不相同, 有一些出差, 设备模拟器代码有上古遗留, 里面写死一堆的十六进制魔法数字完全不敢动</p>
+<p>公司是按年份晋升的制度, 一个萝卜一个坑, 能力业绩再好, 也还得年份足够高. 当时的我觉得这非常离谱, 在这种制度下, 作为新来的年轻人, 不管我怎样努力奋斗学习提升, 向继续上升都是熬时间, 这不是让人失去冲劲了吗? 但后来意识到, 这也算是一种多相对公平的制度, 至少它一视同仁, 而且给了能力一般的同事上升的机会. 并不是每个人都适合开发, 有的同事还面临巨大的家庭压力, 没有多少精力去学习深造, 在这里待着能完成任务, 还能得到上升机会, 也挺好. 如果觉得自己学习能力比较好, 还有很高可塑性, 那就不应该待在这里消磨时间.</p>
+<h3 id="失败的考研尝试-202209---202304">失败的考研尝试 (2022.09 - 2023.04)
+</h3><p>我在纠结中选择了辞职考研, 一直觉得自己学习新知识挺快的, 或许我更适合学术路线, 去做一些前沿的算法研究, 认认真真准备了半年, 考试之前学校通知参加考试必须有3天以内的核酸检测阴性证明, 考试两天去做核酸检测, 结果当天就被感染阳了, 明显感到不适, 第二天高烧头晕呕吐下不了床, 躺了一个星期.</p>
+<p>翻看自己的学习笔记, 觉得像是命运的玩笑.</p>
+<p>学术之路在毕业那一刻就已经结束, 现在已经是这样的现状, 再纠结下去也只是浪费时间, 这段时间就当自己复习了以前的基础课程, 特别是数学知识, 也不是完全浪费时间.</p>
+<p>收拾好心情就应该继续出发, 既然不喜欢大公司的稳定, 或许我应该找一个小一点的地方, 做更考验能力的事情, 得到更多的锻炼, 获取更多的机会.</p>
+<p>&ldquo;小公司机会多&rdquo;, 我带着这样的想法去了第三家公司.</p>
+<h3 id="低空经济小公司-202305---202601">低空经济小公司 (2023.05 - 2026.01)
+</h3><p><strong>初入公司</strong></p>
+<p>这是一个50人的小公司, 所在领域是低空安全, 主要研究无人机反制技术, 在无人机技术发展迅速的今天, 这毫无疑问是一个新兴领域, 刚刚起步大家都在摸索的方向, 来试一试吧!</p>
+<p>刚入公司时, 觉得这个新型的技术方向很不错, 面试时说&quot;年终奖依据公司业绩决定&quot;, 我也只是稍稍犹豫就答应了, 一方面对自己的技术能力有信心, 一方面觉得这个方向也应该是蒸蒸日上, 日子会越来越好的.</p>
+<p><strong>努力工作 期望回报</strong></p>
+<p>我施展浑身解数, 能力尽显, 仅用两周熟悉公司业务逻辑和源码框架并参与正式开发任务, 学会飞无人机, 学会调测公司设备, 入职一个月就出差项目现场, 负责项目实施落地</p>
+<p>入职半年, 深入理解各设备工作方式和协同工作原理, 重构软件平台核心系统模块, 总结封装常用的系统策略, 让软件平台从过去的&quot;配置/参数调整&quot;的工作模式升级为可以通过简单切换系统策略一键配置好预定的工作参数和逻辑, 不仅方便使用, 更避免了配置与参数的错误配套. 改动比较大, 好在测试时没有大问题, 自此该特性分支成为主分支, 其余的所有功能/定制均基于此分支</p>
+<p>之后对系统中诸多问题进行了修复和优化, 包括频率单位的统一, 底层工具库/网络库中的大小问题修复, 内存泄露/栈内存破坏等排查, 忙标记错误修复等</p>
+<p>公司领导对我的工作给予了认可和表扬, 但仅此而已, 精神鼓励固然鼓舞人心, 但是对于一个缺钱的年轻人来说, 只有精神慰藉难以维持持久的动力</p>
+<p><strong>消失的年终奖 一票否决的调薪</strong></p>
+<p>2023年结束, 第一年的我问心无愧. 年终会议上, 老板很高兴, 说今年的合同额远超去年, 让各部门主管猜测今年业绩相比去年提升多少, &ldquo;猜错了, 是去年的10倍!&rdquo;, 能看得出来老板真的很开心, 大家都很开心, 有同事已经在讨论今年年终奖会不会是一辆车了</p>
+<p>结果年会开完了, 春节放假了, 大家依然没有看到任何年终奖的通知, 大家忍不住去问情况, &ldquo;合同额大, 款没收上来&rdquo;, &ldquo;研发投入大&rdquo;, &ldquo;以后会有的&rdquo;, 员工无法获取公司真实财务状况, 这些话语就想万用理由, 不知道真假也无法反驳, 业绩翻10倍, 但没有年终奖</p>
+<p>想着没有年终奖, 我应该至少去争取个调薪, 开年来我尝试去提调薪请求, 第一次提大概是2-3月, 领导(部门主管)对我的工作和能力表达了肯定, 然后说我入职还不满1年, 满1年了可以再提调薪; 我等到5月, 入职的时间, 第二次提出请求, 领导告诉我, 一般公司涨薪申请集中在7月处理, 已经5月这个时间了, 可以再等等, 7月再提; 等到7月, 第三次提请求, 领导同意了, 让我写申请, 走流程, 我很开心, 去准备了材料, 领导说他帮忙提交了流程(我不可见), 让我等一个月. 到8月, 问了下情况说还没处理完, 到9月又问了下, 被告知&quot;流程都走完了, 被老板一票否决了&quot;, 我希望要一个说法, HR过来回应我了, 上来就是官话套话, &ldquo;你凭什么说你觉得自己能力好&rdquo;/&ldquo;你说做出了业绩, 那它在公司实际的那些项目中有什么具体的体现&rdquo;, 部门主管看出我情绪不对, 帮我解围, 说我工作确实还行的, HR立马换了说辞, &ldquo;哦, 是这样啊, 现在的调薪窗口关闭了, 没说什么时候再开放&rdquo;, &ldquo;大家来这里都是看中行业未来发展潜力, 等这个行业发展起来, 福利待遇自然都会好起来, 不用在乎这短期的得失&rdquo;, 后面还说的什么我已经不太记得</p>
+<p><strong>不争气的眼泪 思想的觉悟</strong></p>
+<p>我知道自己不擅长表达, 不太会应对这些说辞, 我点点头之后回去工位了, 回想一下忽然很想哭, 捏拳努力控制, 还是流下不争气的眼泪, 我慌乱的擦干净, 假装眼睛有沙子不舒服, 生怕被人发现</p>
+<p>大概是心里有些冷, 我不再像以前一样充满工作动力, 在那之后我非常想离职, 我家人劝我不要轻易变动, 现在的经济形势非常严峻, 我想了想, 假如离职, 我也不知道接下来应该去哪里, 从棋牌游戏到工业自动化再到低空安全, 我的简历是一张大花脸, 不同的色块组合再一起, 像个小丑</p>
+<p>接下来在这里我见识到了更多的令我惊叹的事情: 第二年没有年终奖在意料之中, 公司发通知春节假后准时上班的同事有惊喜, 以为是开工红包, 和家人打赌不超过50, 我按时去了, 但是看到门口桌子上摆放的牛奶和面包, 然后看到群通知&quot;公司为准时上班的同事准备了营养早餐, 分量有限, 先到先得&quot;, 笑饱了, 没有去领, 公司一共才50人; 中秋节到了, 我猜测公司不会发月饼了, 没想到又猜错了, 公司将供应商拿来的盒装月饼拆散了放在桌子上, 群通知&quot;分量有限, 先到先得&quot;, 月饼袋子上的别家公司商标真刺眼; 有同事的劳动合同到期了, 被直接告知不用来上班了, 没有任何商量. 他继续来打卡, 公司将他从打卡机系统删除了. 他拍照留证, 咨询律师, 找HR谈判, 公司又想给他放无薪假, &ldquo;为方便您找到新工作, 公司特许20天无薪假&rdquo;. 后面还有很多操作, 像把竞业协议揉进保密协议中要求签署, 不同意赔偿已经经过劳动局认定的工伤赔偿等等.</p>
+<p>忽然间我有些不想找工作了, 以前一直想着换工作换公司, 但是看了这家公司的操作之后, 有些失望的明悟 &ndash; 寄人篱下, 就必须入乡随俗. 看不惯这家公司的风俗习惯, 换一家公司也还是可能碰到同样的情况. 可能还是存在氛围和福利都不错的公司, 但是不知道怎么去找, 而且自己的大花脸简历又不知道怎么拿得出手. &ldquo;工作是穷人的选择, 打工工作也就是比破产强点而已&rdquo;, 在这里让我厌倦了打工, 原本极度想离职换工作的心也瞬间稳下来了, 或许我应该想办法展现自己, 表达自己, 多看看别的出路</p>
+<h2 id="总结">总结
+</h2><p>写到这里, 发现自己的语言里对现在的公司有很多不满, 不知不觉写了那么一堆, 字里行间充满嘲讽和戾气, 这是不对的, 哈哈哈, 自己读一遍有点好笑, 真不应该这样, 无论经历怎样路都是自己选的, 人不可以一边走自己选的路一边不停抱怨这个路怎样怎样不好走, 不删了就留着吧, 还可以加一个分段标题, 有一点&quot;莫欺少年穷, 莫欺中年穷&quot;的那味了, 放这里告诫自己</p>
+<p>要么适应环境, 要么改变环境, 如果都不能, 那就换一个环境. 抱怨并不能有任何改变, 而且抱怨的背后是服从, 越是抱怨的凶, 越是严格的服从. 对现状不满, 那就努力提升自己, 不管是想做游戏还是想做自媒体, 都尽早行动起来, 只想不做都是问题, 做起来才有答案!</p>
+<p>愿自己多一些行动和实践, 少一些埋怨和拖延, 早点找到属于自己的道! 与君共勉!</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 fetasty
+    </section>
+    
+    <section class="powerby">
+        
+            hugo + stack 构建 <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.14baea52a6d588261fdaf8f154fbadafaaf2acaf1171c55adb969cfc8e39a2e8.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const powerbySection = document.querySelector('.powerby');
+        if (powerbySection) {
+            
+            const customText = powerbySection.querySelector('br')?.previousSibling?.textContent || '';
+            
+            powerbySection.innerHTML = '';
+            
+            if (customText.trim()) {
+                powerbySection.textContent = customText.trim();
+            }
+        }
+    });
+</script>
+    </body>
+</html>
