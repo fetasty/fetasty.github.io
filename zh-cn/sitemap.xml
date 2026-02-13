@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://fetasty.github.io/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,8 +15,30 @@
                 href="https://fetasty.github.io/"
                 />
   </url><url>
+    <loc>https://fetasty.github.io/post/cpp-programming/</loc>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://fetasty.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://fetasty.github.io/p/cpp11-basic-modern-programming/</loc>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://fetasty.github.io/categories/cpp-programming/</loc>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://fetasty.github.io/en/categories/cpp-programming/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://fetasty.github.io/categories/cpp-programming/"
+                />
+  </url><url>
     <loc>https://fetasty.github.io/categories/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -28,20 +50,11 @@
                 href="https://fetasty.github.io/categories/"
                 />
   </url><url>
-    <loc>https://fetasty.github.io/post/computer-basic/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://fetasty.github.io/tags/ieee/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://fetasty.github.io/p/ieee-floating-point-number/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://fetasty.github.io/post/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://fetasty.github.io/tags/</loc>
-    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
+    <lastmod>2026-02-13T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -52,6 +65,15 @@
                 hreflang="zh-cn"
                 href="https://fetasty.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://fetasty.github.io/post/computer-basic/</loc>
+    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://fetasty.github.io/tags/ieee/</loc>
+    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://fetasty.github.io/p/ieee-floating-point-number/</loc>
+    <lastmod>2026-01-25T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://fetasty.github.io/tags/%E6%B5%AE%E7%82%B9%E6%95%B0/</loc>
     <lastmod>2026-01-25T00:00:00+00:00</lastmod>

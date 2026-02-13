@@ -41,6 +41,18 @@
                 href="https://fetasty.github.io/en/page/"
                 />
   </url><url>
+    <loc>https://fetasty.github.io/en/categories/cpp-programming/</loc>
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://fetasty.github.io/categories/cpp-programming/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://fetasty.github.io/en/categories/cpp-programming/"
+                />
+  </url><url>
     <loc>https://fetasty.github.io/en/categories/</loc>
     <xhtml:link
                 rel="alternate"
