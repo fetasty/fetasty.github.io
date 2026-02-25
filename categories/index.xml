@@ -7,21 +7,21 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>fetasty</copyright>
-        <lastBuildDate>Fri, 13 Feb 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://fetasty.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 25 Feb 2026 15:46:39 +0800</lastBuildDate><atom:link href="https://fetasty.github.io/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>计算机基础</title>
+        <link>https://fetasty.github.io/categories/computer-basic/</link>
+        <pubDate>Wed, 25 Feb 2026 15:46:39 +0800</pubDate>
+        
+        <guid>https://fetasty.github.io/categories/computer-basic/</guid>
+        <description>&lt;img src="https://fetasty.github.io/categories/computer-basic/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post 计算机基础" /&gt;</description>
+        </item>
+        <item>
         <title>C&#43;&#43;编程</title>
         <link>https://fetasty.github.io/categories/cpp-programming/</link>
         <pubDate>Fri, 13 Feb 2026 00:00:00 +0000</pubDate>
         
         <guid>https://fetasty.github.io/categories/cpp-programming/</guid>
         <description></description>
-        </item>
-        <item>
-        <title>计算机基础</title>
-        <link>https://fetasty.github.io/categories/computer-basic/</link>
-        <pubDate>Sun, 25 Jan 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://fetasty.github.io/categories/computer-basic/</guid>
-        <description>&lt;img src="https://fetasty.github.io/categories/computer-basic/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post 计算机基础" /&gt;</description>
         </item>
         
     </channel>

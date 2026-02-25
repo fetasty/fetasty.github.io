@@ -338,7 +338,7 @@
 
 
                 <time class="article-time--reading">
-                    阅读时长: 3 分钟
+                    阅读时长: 4 分钟
                 </time>
             </div>
         
@@ -409,6 +409,17 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
 <p>NaN: 当阶码全1, 且尾码M非全0时, 全都表示NaN, NaN没有正负之分, 符号位0或1都是NaN</p>
 </li>
 </ul>
+<p>因为特殊值的存在, 所以浮点数在表示一般的数值时, 其实阶码E可用的范围需要去掉全0和全1的特殊情况, 在单精度浮点数中, 也就意味着E的取值范围是 [1, 254], 对应的指数 e 取值范围是 [-126, 127], 因此单精度浮点数表示范围为</p>
+$$
+(-1)^1 \times (1.M_{max}) \times 2^{127} \approx -3.4028235 \times 10 ^ {38}
+$$<p>到</p>
+$$
+(-1)^0 \times (1.M_{max}) \times 2^{127} \approx 3.4028235 \times 10 ^ {38}
+$$<p>在取最大/最小值时, 仅符号位不同, 尾码M为23位全1, 指数取最大127</p>
+<p>当浮点数的绝对值非常小, 非常接近0, 连阶码取最小值都无法表达时, IEEE 754 允许它进入<strong>非规格化状态</strong>, 此时 $E = 0$, 并且默认隐含的最高位 1 变成了 0, 指数被固定为 -126, 此时的真值计算</p>
+$$
+X = (-1)^S \times (0 + M) \times 2^{-126}
+$$<p>当 $E = 0$ 且 $M \neq 0$ 时, 则浮点数为非规格化表达, 默认隐含最高位为0</p>
 <h2 id="编码测试">编码测试
 </h2><p>编写一个函数, 用于将数值以二进制打印</p>
 <div class="highlight"><div class="chroma">
@@ -459,10 +470,12 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><p>先看一下1.0的结果 <code>printBits(@as(f32, 1.0))</code> 结果为 <code>1     f32  : 00111111 10000000 00000000 00000000</code></p>
+</div><p>先看一下1.0的结果 <code>printBits(@as(f32, 1.0))</code></p>
+<p>输出为 <code>1     f32  : 00111111 10000000 00000000 00000000</code></p>
 <p>其中S=0, $E=(01111111)_2=127$, M=0</p>
 <p>也就是 $1.0=(-1)^S\times (1.M) \times 2^{E-127}=1\times 1.0 \times 2^0$</p>
-<p>再试试0.5, <code>printBits(@as(f32, 0.5))</code> 结果为 <code>0.5   f32  : 00111111 00000000 00000000 00000000</code> 与1.0的区别仅仅是阶码小了1</p>
+<p>再试试0.5, <code>printBits(@as(f32, 0.5))</code></p>
+<p>输出为 <code>0.5   f32  : 00111111 00000000 00000000 00000000</code> 与1.0的区别仅仅是阶码小了1</p>
 <p>真值计算 $0.5=(-1)^(0)\times (1.0) \times 2^{126-127}=1\times 1.0 \times 2^{-1}$</p>
 <p>用源码验证一下所有特殊值是否如我们所想</p>
 <div class="highlight"><div class="chroma">
@@ -482,6 +495,12 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
 </span><span class="lnt">13
 </span><span class="lnt">14
 </span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-zig" data-lang="zig"><span class="line"><span class="cl"><span class="kr">pub</span><span class="w"> </span><span class="k">fn</span><span class="w"> </span><span class="nf">main</span><span class="p">()</span><span class="w"> </span><span class="kt">void</span><span class="w"> </span><span class="p">{</span><span class="w">
@@ -489,7 +508,8 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="o">-</span><span class="nb">@as</span><span class="p">(</span><span class="kt">f32</span><span class="p">,</span><span class="w"> </span><span class="mf">0.0</span><span class="p">));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="nb">@as</span><span class="p">(</span><span class="kt">f32</span><span class="p">,</span><span class="w"> </span><span class="mf">1.0</span><span class="p">));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="nb">@as</span><span class="p">(</span><span class="kt">f32</span><span class="p">,</span><span class="w"> </span><span class="mf">0.5</span><span class="p">));</span><span class="w">
-</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="n">std</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">inf</span><span class="p">(</span><span class="kt">f32</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kr">const</span><span class="w"> </span><span class="n">inf</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">std</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">inf</span><span class="p">(</span><span class="kt">f32</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="n">inf</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="o">-</span><span class="n">std</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">inf</span><span class="p">(</span><span class="kt">f32</span><span class="p">));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="n">std</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">nan</span><span class="p">(</span><span class="kt">f32</span><span class="p">));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="o">-</span><span class="n">std</span><span class="p">.</span><span class="n">math</span><span class="p">.</span><span class="nf">nan</span><span class="p">(</span><span class="kt">f32</span><span class="p">));</span><span class="w">
@@ -498,21 +518,27 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">nan_u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">nan_u32</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">));</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">nan_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">@bitCast</span><span class="p">(</span><span class="n">nan_u32</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="n">nan_test</span><span class="p">);</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kr">var</span><span class="w"> </span><span class="n">inf_test</span><span class="o">:</span><span class="w"> </span><span class="kt">u32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">@bitCast</span><span class="p">(</span><span class="n">inf</span><span class="p">);</span><span class="w"> </span><span class="c1">// inf 按位转换为 u32, 方便位处理
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="n">inf_test</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="p">(</span><span class="n">inf_test</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="p">(</span><span class="mi">1</span><span class="w"> </span><span class="o">&lt;&lt;</span><span class="w"> </span><span class="mi">3</span><span class="p">));</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kr">const</span><span class="w"> </span><span class="n">value</span><span class="o">:</span><span class="w"> </span><span class="kt">f32</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nb">@bitCast</span><span class="p">(</span><span class="n">inf_test</span><span class="p">);</span><span class="w"> </span><span class="c1">// 位处理之后转换回 f32
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nf">printBits</span><span class="p">(</span><span class="n">value</span><span class="p">);</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
 </div><p>输出结果如下</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span><span class="lnt">7
-</span><span class="lnt">8
-</span><span class="lnt">9
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">0     f32  : 00000000 00000000 00000000 00000000
@@ -524,9 +550,13 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
 </span></span><span class="line"><span class="cl">nan   f32  : 01111111 11000000 00000000 00000000
 </span></span><span class="line"><span class="cl">-nan  f32  : 11111111 11000000 00000000 00000000
 </span></span><span class="line"><span class="cl">nan   f32  : 01111111 11000000 00000000 00001000
+</span></span><span class="line"><span class="cl">nan   f32  : 01111111 10000000 00000000 00001000
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>可以发现, 无穷大的阶码全1, 尾码全0, 改变符号位可得到正/负无穷大; NaN阶码全1, 尾码非0, 改变符号位依然是NaN, 试了一下在无穷大的基础上, 将尾码倒数第4位(随机一位)设置为1, 输出为NaN, 符合预期</p>
+</div><p>可以发现, 无穷大的阶码全1, 尾码全0, 改变符号位可得到正/负无穷大</p>
+<p>NaN阶码全1, 尾码非0, 改变符号位依然是NaN</p>
+<p>在NaN的基础上将尾码稍加改动, 只要不改为全0, 都是NaN (倒数第2行输出)</p>
+<p>在无穷大的基础上, 将尾码倒数第4位(随机一位)设置为1, 输出为NaN, 符合预期 (最后一行输出)</p>
 
 </section>
 
@@ -595,6 +625,28 @@ $$ 11.1101_2=1\times2^1+1\times2^0+1\times2^{-1}+1\times2^{-2}+0\times2^{-3}+1\t
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/endianness/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">大小端序存储</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     

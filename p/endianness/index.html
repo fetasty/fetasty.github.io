@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="大小端序是一个常见的, 但又不可忽视的知识, 弄清楚端序问题对于计算机的内存布局理解更加深刻">
+<meta name="keywords" content="端序, 内存布局"><title>大小端序存储</title>
+
+<link rel='canonical' href='https://fetasty.github.io/p/endianness/'>
+
+<link rel="stylesheet" href="/scss/style.min.b9e9128fec450ebccecc4ec9900157f32b85d0609bcd5ee3293968bcaa1235f2.css"><meta property='og:title' content="大小端序存储">
+<meta property='og:description' content="大小端序是一个常见的, 但又不可忽视的知识, 弄清楚端序问题对于计算机的内存布局理解更加深刻">
+<meta property='og:url' content='https://fetasty.github.io/p/endianness/'>
+<meta property='og:site_name' content='风酥糖'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='端序' /><meta property='article:tag' content='内存布局' /><meta property='article:published_time' content='2026-02-25T15:46:39&#43;08:00'/><meta property='article:modified_time' content='2026-02-25T15:46:39&#43;08:00'/>
+<meta name="twitter:title" content="大小端序存储">
+<meta name="twitter:description" content="大小端序是一个常见的, 但又不可忽视的知识, 弄清楚端序问题对于计算机的内存布局理解更加深刻">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_5d63a2fe6c3efe2b.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">😄</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">风酥糖</a></h1>
+            <h2 class="site-description">别想, 去做! 烂归烂, 总比不干好.</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='mailto://fetasty@outlook.com'
+                        target="_blank"
+                        title="Email"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="icon icon-tabler icons-tabler-outline icon-tabler-mail"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10" /><path d="M3 7l9 6l9 -6" /></svg>
+                        
+                    </a>
+                </li>
+            
+                <li>
+                    <a 
+                        href='https://github.com/fetasty'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>归档</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>搜索</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://fetasty.github.io/" selected>简体中文</option>
+                                
+                                    <option value="https://fetasty.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#端序概念">端序概念</a></li>
+    <li><a href="#存储示例">存储示例</a></li>
+    <li><a href="#常见标准与应用场景">常见标准与应用场景</a>
+      <ol>
+        <li><a href="#物理硬件与操作系统-系统端序">物理硬件与操作系统 (系统端序)</a></li>
+        <li><a href="#编程语言层面的处理-语言端序">编程语言层面的处理 (语言端序)</a></li>
+        <li><a href="#网络数据传输-tcpip-协议标准">网络数据传输 (TCP/IP 协议标准)</a></li>
+      </ol>
+    </li>
+    <li><a href="#字节端序源码示例">字节端序源码示例</a></li>
+    <li><a href="#使用c语言检测系统端序">使用C语言检测系统端序</a>
+      <ol>
+        <li><a href="#方法一-指针强制转换法">方法一: 指针强制转换法</a></li>
+        <li><a href="#方法二-联合体法">方法二: 联合体法</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/computer-basic/" style="background-color: #2a9d8f; color: #fff;">
+                计算机基础
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/endianness/">大小端序存储</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            大小端序是一个常见的, 但又不可忽视的知识, 弄清楚端序问题对于计算机的内存布局理解更加深刻
+        </h3>
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published" datetime='2026-02-25T15:46:39&#43;08:00'>2026-02-25</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    阅读时长: 4 分钟
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="端序概念">端序概念
+</h2><p>端序（Endianness)主要定义了<strong>多字节数据</strong>在内存地址中的存放顺序.</p>
+<ul>
+<li>
+<p><strong>大端模式 (Big-Endian):</strong>  数据的高位字节（MSB)存放在内存的<strong>低地址</strong>端.</p>
+<ul>
+<li>符合人类从左到右的阅读习惯.</li>
+</ul>
+</li>
+<li>
+<p><strong>小端模式 (Little-Endian):</strong>  数据的低位字节（LSB)存放在内存的<strong>低地址</strong>端.</p>
+<ul>
+<li>符合计算机逻辑运算的处理习惯.</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>记忆口诀:</strong></p>
+<ul>
+<li><strong>大</strong>端: <strong>高</strong>位在<strong>低</strong>址</li>
+<li><strong>小</strong>端: <strong>低</strong>位在<strong>低</strong>址</li>
+</ul>
+</blockquote>
+<hr>
+<h2 id="存储示例">存储示例
+</h2><p>以十进制数字 <code>44033</code> 为例, 其十六进制值为 <code>0x0000AC01</code>（32位整数, 4字节).</p>
+<p>假设内存地址从左向右依次增大（低地址 -&gt; 高地址):</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>模式</strong></th>
+          <th><strong>内存布局 (地址: 低 -&gt;</strong>  <strong>高)</strong></th>
+          <th><strong>说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>大端存储</strong></td>
+          <td><code>00</code> <code>00</code> <code>AC</code> <code>01</code></td>
+          <td><code>01</code>是最低位, 放在最高地址</td>
+      </tr>
+      <tr>
+          <td><strong>小端存储</strong></td>
+          <td><code>01</code> <code>AC</code> <code>00</code> <code>00</code></td>
+          <td><code>01</code>是最低位, 放在最低地址</td>
+      </tr>
+  </tbody>
+</table></div>
+<hr>
+<h2 id="常见标准与应用场景">常见标准与应用场景
+</h2><p>大小端模式的存在, 主要是因为不同 CPU 架构的设计理念不同. 为了在不同的软硬件环境中准确地传递和解析数据, 形成了以下几个层面的标准与应用规范:</p>
+<h3 id="物理硬件与操作系统-系统端序">物理硬件与操作系统 (系统端序)
+</h3><p>这一层决定了数据在物理内存条中真实的摆放顺序.</p>
+<ul>
+<li>
+<p><strong>小端序 (Little-Endian) - 当前绝对主流:</strong></p>
+<ul>
+<li><strong>架构:</strong>  Intel/AMD 的 x86/x64 架构, 以及大部分移动设备使用的 ARM 架构.</li>
+<li><strong>操作系统:</strong>  Windows, Linux, Android, iOS, 以及现代的 macOS (Intel 和 Apple Silicon 芯片).</li>
+<li><strong>优势:</strong>  CPU 从低地址读取低位字节, 方便在读取的同时进行进位运算, 硬件电路设计相对简单高效.</li>
+</ul>
+</li>
+<li>
+<p><strong>大端序 (Big-Endian) - 历史与特定设备:</strong></p>
+<ul>
+<li><strong>架构:</strong>  早期的 PowerPC 架构, SPARC 架构, 以及 IBM 大型机.</li>
+<li><strong>操作系统:</strong>  早期的 Mac OS (基于 PowerPC 芯片时代).</li>
+</ul>
+</li>
+</ul>
+<h3 id="编程语言层面的处理-语言端序">编程语言层面的处理 (语言端序)
+</h3><p>不同编程语言对底层硬件的抽象程度不同, 导致它们对待端序的策略也不同:</p>
+<ul>
+<li>
+<p><strong>C / C++ (贴近硬件的 Native 语言):</strong></p>
+<ul>
+<li><strong>策略:</strong>  完全映射底层硬件. 硬件是小端, 程序内存里就是小端.</li>
+<li><strong>特点:</strong>  允许通过指针直接访问物理内存布局, 因此可以用 C 语言代码准确检测出当前系统的端序.</li>
+</ul>
+</li>
+<li>
+<p><strong>Java (自带虚拟机的跨平台语言):</strong></p>
+<ul>
+<li><strong>策略:</strong>  强制统一标准, 屏蔽硬件差异.</li>
+<li><strong>特点:</strong>  Java 虚拟机 (JVM) 规范要求其类文件结构, 字节流解析默认统一使用 <strong>大端序 (Big-Endian)</strong> . 底层运行时, JVM 会自动将宿主机的小端数据翻转为大端供 Java 程序使用. 因此, Java 程序员通常不需要感知底层硬件的端序.</li>
+</ul>
+</li>
+<li>
+<p><strong>Go / Rust:</strong>  类似于 C, 默认采用宿主机的字节序（通常是小端), 但在标准库中提供了显式处理大端/小端的包（如 Go 的 <code>encoding/binary</code>), 方便编写网络协议.</p>
+</li>
+<li>
+<p><strong>Python:</strong>  纯解释型语言. 整数在 Python 内部是一个复杂的对象（PyObject), 根本看不到它底层的字节序. 只有当使用 <code>struct</code> 模块把数字转成二进制流时, 才需要指定 <code>&lt;</code> (小端) 或 <code>&gt;</code> (大端).</p>
+</li>
+</ul>
+<h3 id="网络数据传输-tcpip-协议标准">网络数据传输 (TCP/IP 协议标准)
+</h3><p>这是端序转换最核心的应用场景.</p>
+<ul>
+<li>
+<p><strong>痛点:</strong>  如果一个运行在 x86 系统 (小端) 的电脑, 给一个运行在老式 IBM 主机 (大端) 的设备发送数据, 由于双方解析字节流的顺序相反, 数据就会出错.</p>
+</li>
+<li>
+<p><strong>统一标准 (网络字节序):</strong>  为了解决异构平台的通信问题, TCP/IP 协议强制规定: <strong>在网络上传输的多字节数据, 必须统一采用大端模式 (Big-Endian)</strong> .</p>
+</li>
+<li>
+<p><strong>转换规则:</strong></p>
+<ul>
+<li>
+<p><strong>单字节数据 (<code>char</code>):</strong>  只占 1 个字节, 不存在顺序问题, 直接传输.</p>
+</li>
+<li>
+<p><strong>多字节数据 (<code>int</code>, <code>short</code>, <code>float</code>等):</strong></p>
+<ul>
+<li><strong>发送端:</strong>  必须先将数据从<strong>主机字节序</strong>转换为<strong>网络字节序</strong> (大端) 后, 再发送到网络上.</li>
+<li><strong>接收端:</strong>  收到网络数据后, 必须将其从<strong>网络字节序</strong>转换回当前环境对应的<strong>主机字节序</strong>, 然后再进行处理.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p>在实际工作中, 我们在定消息协议时, 可以提前定义好字节序与对齐方式, 之后网络两端的程序都按照规定的方式解析</p>
+<p>比如某个消息按照二进制传输, 约定字节按照1字节对齐(无空白字节填充), 小端序传输, 只要保证所有网络端的程序都按照相同约定的方式处理数据即可</p>
+<hr>
+<h2 id="字节端序源码示例">字节端序源码示例
+</h2><p>以下代码演示了 Python 中如何使用大端或小端打包数据, 并按字节输出, 与之前的结论示例对应</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">struct</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 数字 44033 (0x0000AC01)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;--- 小端模式 (&lt;) ---&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># pack(&#39;&lt;i&#39;): 小端打包成 int</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># unpack(&#39;&lt;BBBB&#39;): 按小端解包成 4 个 unsigned char</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&lt;BBBB&#39;</span><span class="p">,</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&lt;i&#39;</span><span class="p">,</span> <span class="mi">44033</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s1">02X</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出: 0X01AC0000 (低位 01 在前)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n\n</span><span class="s2">--- 大端模式 (&gt;) ---&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># pack(&#39;&gt;i&#39;): 大端打包成 int</span>
+</span></span><span class="line"><span class="cl"><span class="n">result</span> <span class="o">=</span> <span class="n">struct</span><span class="o">.</span><span class="n">unpack</span><span class="p">(</span><span class="s1">&#39;&gt;BBBB&#39;</span><span class="p">,</span> <span class="n">struct</span><span class="o">.</span><span class="n">pack</span><span class="p">(</span><span class="s1">&#39;&gt;i&#39;</span><span class="p">,</span> <span class="mi">44033</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s1">&#39;0x&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">result</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;</span><span class="si">{</span><span class="n">b</span><span class="si">:</span><span class="s1">02X</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 输出: 0X0000AC01 (高位 00 在前)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="使用c语言检测系统端序">使用C语言检测系统端序
+</h2><p>可以通过检查变量在内存中的首字节来判断当前环境的端序</p>
+<h3 id="方法一-指针强制转换法">方法一: 指针强制转换法
+</h3><p>原理: 将 <code>int</code> 的地址强制转换为 <code>char*</code>, 只读取内存的第一个字节（低地址).</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">test1_endian</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 十六进制 0x00000001
+</span></span></span><span class="line"><span class="cl">    <span class="kt">char</span> <span class="o">*</span><span class="n">a</span> <span class="o">=</span> <span class="p">(</span><span class="kt">char</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">i</span><span class="p">;</span> <span class="c1">// 获取低地址的值
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果低地址存的是 1, 说明低位在低址 -&gt; 小端
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">*</span><span class="n">a</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;当前系统为: 小端</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span>
+</span></span><span class="line"><span class="cl">         <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;当前系统为: 大端</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="方法二-联合体法">方法二: 联合体法
+</h3><p>原理: <code>Union</code> 的所有成员共用同一块内存首地址.</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-c" data-lang="c"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">test2_endian</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">     <span class="k">union</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="kt">char</span> <span class="n">c</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">     <span class="p">}</span> <span class="n">un</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     <span class="n">un</span><span class="p">.</span><span class="n">i</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 写入 0x00000001
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">     <span class="c1">// 读取 c, 相当于读取 int 的低地址字节
+</span></span></span><span class="line"><span class="cl">     <span class="k">if</span><span class="p">(</span><span class="n">un</span><span class="p">.</span><span class="n">c</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;当前系统为: 小端</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">     <span class="p">}</span>
+</span></span><span class="line"><span class="cl">     <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;当前系统为: 大端</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">     <span class="p">}</span>
+</span></span><span class="line"><span class="cl">     <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%AB%AF%E5%BA%8F/">端序</a>
+        
+            <a href="/tags/%E5%86%85%E5%AD%98%E5%B8%83%E5%B1%80/">内存布局</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">相关文章</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/ieee-floating-point-number/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">IEEE 浮点数结构</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src='//unpkg.com/@waline/client@v2/dist/waline.js'></script>
+<link href='//unpkg.com/@waline/client@v2/dist/waline.css' rel='stylesheet'/>
+<div id="waline" class="waline-container"></div>
+<style>
+    .waline-container {
+        background-color: var(--card-background);
+        border-radius: var(--card-border-radius);
+        box-shadow: var(--shadow-l1);
+        padding: var(--card-padding);
+        --waline-font-size: var(--article-font-size);
+    }
+    .waline-container .wl-count {
+        color: var(--card-text-color-main);
+    }
+</style><script>
+    
+    Waline.init({"dark":"html[data-scheme=\"dark\"]","el":"#waline","emoji":["https://unpkg.com/@waline/emojis@1.0.1/weibo"],"locale":{"admin":"Admin","placeholder":null},"requiredMeta":["name","email","url"],"serverURL":"https://comment.fetasty.top"});
+</script>
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2020 - 
+        
+        2026 fetasty
+    </section>
+    
+    <section class="powerby">
+        
+            hugo + stack 构建 <br/>
+        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
+        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.33.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+    
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.14baea52a6d588261fdaf8f154fbadafaaf2acaf1171c55adb969cfc8e39a2e8.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        
+        const powerbySection = document.querySelector('.powerby');
+        if (powerbySection) {
+            
+            const customText = powerbySection.querySelector('br')?.previousSibling?.textContent || '';
+            
+            powerbySection.innerHTML = '';
+            
+            if (customText.trim()) {
+                powerbySection.textContent = customText.trim();
+            }
+        }
+    });
+</script>
+    </body>
+</html>
